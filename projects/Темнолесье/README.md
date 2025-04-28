@@ -19,3 +19,14 @@
    - Выявление аномалий и выбросов
 ## Схема базы данных
 ![image](https://github.com/user-attachments/assets/e4702043-d7eb-438e-8c54-4283fd395b7e)
+
+## Описание таблиц
+| Таблица | Описание | Ключевые поля |
+|---------|----------|---------------|
+| **users** | Информация об игроках | `id`, `race_id`, `class_id`, `country_id`, `payer` (флаг платящего игрока) |
+| **events** | История внутриигровых покупок за валюту "райские лепестки" | `transaction_id`, `user_id`, `item_id`, `amount` (сумма), `timestamp` |
+| **skills** | Легендарные умения персонажей | `skill_id`, `skill_name`, `description`, `effect` |
+| **race** | Расы игровых персонажей | `race_id`, `race_name`, `description`, `bonuses` |
+| **classes** | Классы персонажей | `class_id`, `class_name`, `characteristics` |
+| **country** | Страны регистрации игроков | `country_id`, `country_name`, `region` |
+| **items** | Эпические предметы, покупаемые за "райские лепестки" | `item_id`, `item_name`, `price`, `category`, `stats` |
