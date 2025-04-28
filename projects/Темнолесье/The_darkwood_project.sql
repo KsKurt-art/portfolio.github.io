@@ -6,9 +6,9 @@
 */
 
 -- Часть 1. Исследовательский анализ данных
--- Задача 1. Исследование доли платящих игроков
+-- Исследование доли платящих игроков
 
--- 1.1. Доля платящих пользователей по всем данным:
+-- Доля платящих пользователей по всем данным:
 SELECT
     COUNT(u.id) AS total_players,
     COUNT(CASE WHEN u.payer = 1 THEN u.id END) AS paying_players,
@@ -16,7 +16,7 @@ SELECT
 FROM
     fantasy.users AS u;
 
--- 1.2. Доля платящих пользователей в разрезе расы персонажа:
+-- Доля платящих пользователей в разрезе расы персонажа:
 SELECT
     r.race AS раса_персонажа,
     COUNT(CASE WHEN u.payer = 1 THEN u.id END) AS количество_платящих_игроков,
@@ -29,8 +29,8 @@ JOIN
 GROUP BY
     r.race;
 
--- Задача 2. Исследование внутриигровых покупок
--- 2.1. Статистические показатели по полю amount:
+-- Исследование внутриигровых покупок
+-- Статистические показатели по полю amount:
 SELECT
   COUNT(*) AS total_purchases,
   SUM(amount) AS total_amount,
@@ -41,7 +41,7 @@ SELECT
   STDDEV(amount) AS stddev_amount
 FROM fantasy.events;
 
--- 2.2: Аномальные нулевые покупки:
+-- Аномальные нулевые покупки:
 SELECT
   COUNT(*) AS zero_cost_purchases,
   ROUND(CAST(COUNT(*) AS NUMERIC) * 100 / (SELECT COUNT(*) FROM fantasy.events),2) AS zero_cost_percentage
@@ -49,7 +49,7 @@ FROM fantasy.events
 WHERE amount = 0;
 
 
--- **2.3: Сравнительный анализ активности платящих и неплатящих игроков: **КОРРЕКТИРОВКА**
+-- Сравнительный анализ активности платящих и неплатящих игроков: 
 WITH PlayerPurchaseSummary AS (
     SELECT
         CASE 
@@ -72,7 +72,7 @@ FROM PlayerPurchaseSummary
 GROUP BY payer;
 
 
--- **2.4: Популярные эпические предметы:** **КОРРЕКТИРОВКА**
+-- Популярные эпические предметы:
 WITH ItemSales AS (
     SELECT
         i.game_items AS item_name,
@@ -107,8 +107,8 @@ FROM
 ORDER BY
    isales.unique_buyers DESC;
 
--- Часть 2. Решение ad hoc-задач
--- Задача 1. Зависимость активности игроков от расы персонажа: **КОРРЕКТИРОВКА**
+-- Решение ad hoc-задач
+-- Зависимость активности игроков от расы персонажа: 
 WITH gamers_stat AS (
   -- Считаем статистику по игрокам
     SELECT
